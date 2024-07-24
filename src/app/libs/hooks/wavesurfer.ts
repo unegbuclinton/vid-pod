@@ -46,8 +46,6 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
     }
   };
 
-  console.log(seekHistory);
-
   useEffect(() => {
     if (videoRef.current && waveformRef.current) {
       setRefsReady(true);
