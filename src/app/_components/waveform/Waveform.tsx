@@ -55,23 +55,22 @@ const Waveform = ({
         </div>
       </div>
       {loading && (
-        <div className="animate-pulse">
+        <div className="mb-2 animate-pulse">
           Please wait .... wave form is loading, maybe due to network or file
           size
         </div>
       )}
-      {!loading && (
-        <div
-          ref={waveformRef}
-          style={{
-            width: "100%",
-            height: "139px",
-            background: "#F0ABFC",
-            borderRadius: "8px",
-            border: "6px solid black",
-          }}
-        />
-      )}
+
+      <div
+        ref={waveformRef}
+        style={{
+          width: "100%",
+          height: "139px",
+          background: "#F0ABFC",
+          borderRadius: "8px",
+          border: "6px solid black",
+        }}
+      />
     </div>
   );
 };
