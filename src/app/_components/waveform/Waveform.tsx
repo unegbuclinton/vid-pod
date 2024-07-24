@@ -10,6 +10,7 @@ const Waveform = ({
   duration: number;
   waveformRef: React.MutableRefObject<HTMLDivElement | null>;
 }) => {
+  console.log(waveformRef);
   return (
     <div className="w-full rounded-lg border border-lightestGrey p-6 shadow-buttonShadow">
       <div className="mb-8 flex items-center justify-between">
@@ -41,7 +42,7 @@ const Waveform = ({
         </div>
       </div>
       <div
-        id="waveform"
+        // id="waveform"
         ref={waveformRef}
         style={{
           width: "100%",

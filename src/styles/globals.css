@@ -15,8 +15,8 @@
   display: none;
 }
 .hidden-scroll {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 input[type="range"].custom-range {
@@ -44,7 +44,7 @@ input[type="range"].custom-range::-webkit-slider-thumb {
   border-radius: 50%;
   background: #333;
   cursor: pointer;
-  margin-top: -7px; /* Adjust according to the height of the thumb */
+  margin-top: -7px;
 }
 
 input[type="range"].custom-range:focus::-webkit-slider-runnable-track {

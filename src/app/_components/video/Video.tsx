@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import VideoElement from "./videoElement/VideoElement";
 import VideoControl from "./videoControls/VideoControl";
 
@@ -56,9 +50,20 @@ const Video = ({
       videoRef.current.currentTime = videoRef.current.duration;
     }
   };
+
   useEffect(() => {
-    setDuration(videoRef.current?.duration ?? 0);
-  }, [videoRef.current]);
+    const handleLoadedMetadata = () => {
+      if (videoRef.current) {
+        setDuration(videoRef.current.duration);
+      }
+    };
+    const videoElement = videoRef.current;
+    videoElement?.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+    return () => {
+      videoElement?.removeEventListener("loadedmetadata", handleLoadedMetadata);
+    };
+  }, []);
 
   return (
     <div>

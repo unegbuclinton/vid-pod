@@ -6,6 +6,8 @@ import Video from "../video/Video";
 import Waveform from "../waveform/Waveform";
 import { api } from "@/trpc/react";
 import useWaveSurfer from "@/app/libs/hooks/wavesurfer";
+import WaveSurfer from "wavesurfer.js";
+import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 
 const VideoContent: React.FC = () => {
   const [duration, setDuration] = useState<number>(0);
@@ -18,6 +20,11 @@ const VideoContent: React.FC = () => {
   const { data, error, isLoading } = api.episode.getEpisodes.useQuery();
 
   useWaveSurfer({ videoRef, waveformRef });
+
+  // const videoRef = useRef<HTMLVideoElement | null>(null);
+  // const waveformRef = useRef<HTMLDivElement | null>(null);
+  // const wavesurfer = useRef<WaveSurfer | null>(null);
+  // const [refsReady, setRefsReady] = useState(false);
 
   useEffect(() => {
     if (data) {

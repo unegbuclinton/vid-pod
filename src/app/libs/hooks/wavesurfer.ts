@@ -1,5 +1,5 @@
 // src/hooks/useWaveSurfer.ts
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 
@@ -10,16 +10,24 @@ interface UseWaveSurferProps {
 
 const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
   const wavesurfer = useRef<WaveSurfer | null>(null);
+  const [refsReady, setRefsReady] = useState(false);
 
   useEffect(() => {
     if (videoRef.current && waveformRef.current) {
+      setRefsReady(true);
+    }
+  }, [videoRef.current, waveformRef.current]);
+
+  useEffect(() => {
+    if (refsReady) {
+      console.log("I am trying to create");
       const regions = RegionsPlugin.create();
 
       wavesurfer.current = WaveSurfer.create({
-        container: waveformRef.current,
+        container: waveformRef.current as HTMLElement,
         waveColor: "#fff",
         progressColor: "#fff",
-        media: videoRef.current,
+        media: videoRef.current as HTMLMediaElement,
         dragToSeek: true,
         cursorColor: "#EF4444",
         backend: "MediaElement",
@@ -30,7 +38,6 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
         plugins: [regions],
       });
 
-      // Example region setup
       regions.addRegion({
         start: 9,
         end: 10,
@@ -41,12 +48,11 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
         channelIdx: 2,
       });
 
-      // Clean up function
       return () => {
         wavesurfer.current?.destroy();
       };
     }
-  }, [videoRef, waveformRef]);
+  }, [refsReady]);
 
   return { wavesurfer };
 };
