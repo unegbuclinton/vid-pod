@@ -10,7 +10,7 @@ const VideoElement: React.FC<videoProp> = ({ videoRef, data }) => {
       className={`mb-4 h-[85%] w-full animate-pulse rounded-lg bg-dark/65`}
     ></div>;
   const url =
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
   return (
     <div className={`mb-4 h-[85%] w-full rounded-lg`}>
       <video ref={videoRef} className="rounded-lg">

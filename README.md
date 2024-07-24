@@ -1,29 +1,69 @@
-# Create T3 App
+## Getting Started on Vidpod
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Follow these steps to set up and run the project on your local machine:
 
-## What's next? How do I make an app with this?
+### Prerequisites
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Make sure you have the following installed on your system:
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- [Node.js](https://nodejs.org/) (version 20.12 or higher)
+- [Git](https://git-scm.com/)
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### Installation
 
-## Learn More
+1.  **Clone the repository:**
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+    Open your terminal and run the following command to clone the repository:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+    ```bash
+    git clone https://github.com/unegbuclinton/Vidpod.git
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+    ```
 
-## How do I deploy this?
+2.  **Navigate to the project directory::**
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+    Change into the directory where the project is located:
+
+    ```bash
+    cd Vidpod
+
+    ```
+
+3.  **Navigate to the project branch::**
+
+    Change into the branch where the project is located:
+
+    ```bash
+    git checkout main
+
+    ```
+
+4.  **Install dependencies::**
+
+    Run the following command to install all necessary dependencies:
+
+    ### Note
+
+    Please confirm your node version, be sure to run on node version 20.12 or higher. Lesser versions raised some dependency errors.
+
+    ```bash
+    npm install
+
+    ```
+
+5.  **Environment Variables::**
+
+    You do not need to update the .env file as it has been disabled in the .gitignore file. All necessary environment variables are already configured.
+
+6.  **Running the Project::**
+
+    Once the dependencies are installed, you can start the development server with the following command:
+
+    ```bash
+    npm run dev
+
+    ```
+
+    This will launch the project in development mode. You can then open your browser and visit http://localhost:3000 or the chosen port to view the application.
+
+    **Thank you ROX**
