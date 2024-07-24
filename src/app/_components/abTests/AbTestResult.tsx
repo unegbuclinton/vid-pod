@@ -2,14 +2,12 @@ import React from "react";
 import VdIcon from "../vidIcons/VidIcons";
 import VdButton from "../button/VdButton";
 import VideoCard from "../videoCard/VideoCard";
-import { api } from "@/trpc/react";
-import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
+import { useMarker } from "@/app/libs/hooks/syncToServer";
 
 const AbTestResult = ({
   onClose,
   adResults,
-  setVideoData,
   episodeId,
 }: {
   onClose: () => void;
@@ -22,50 +20,9 @@ const AbTestResult = ({
 
   const count = adResults.length;
   const randomIndex = Math.floor(Math.random() * adResults.length);
-  const { refetch } = api.episode.getEpisodes.useQuery();
-  const createMarker = api.admarker.createNewMarker.useMutation({
-    onError: (err) => {
-      toast.error("Something went wrong!");
-      console.log(err.message);
-    },
-    onSuccess: async () => {
-      toast.success("Created successfully!");
 
-      try {
-        const updatedData = await refetch();
-        if (updatedData) {
-          setVideoData(updatedData.data!);
-        }
-      } catch (err: any) {
-        toast.error("Failed to fetch episodes");
-        console.error(err.message);
-      } finally {
-        onClose();
-      }
-    },
-  });
+  const { createMarker, updateMarker } = useMarker();
 
-  const updateMarker = api.admarker.updateMarker.useMutation({
-    onError: (err) => {
-      toast.error("Something went wrong!");
-      console.log(err.message);
-    },
-    onSuccess: async () => {
-      toast.success("Updated successfully!");
-
-      try {
-        const updatedData = await refetch();
-        if (updatedData) {
-          setVideoData(updatedData.data!);
-        }
-      } catch (err: any) {
-        toast.error("Failed to fetch episodes");
-        console.error(err.message);
-      } finally {
-        onClose();
-      }
-    },
-  });
   return (
     <div className="relative rounded-lg bg-white p-8">
       <span className="absolute right-4 top-4 cursor-pointer" onClick={onClose}>
@@ -97,15 +54,16 @@ const AbTestResult = ({
         <VdButton
           onClick={() => {
             !editParam
-              ? createMarker.mutate({
+              ? createMarker({
                   adMarkerType: "A/B",
                   episodeId: episodeId,
                 })
-              : updateMarker.mutate({
+              : updateMarker({
                   adMarkerType: "A/B",
                   episodeId: episodeId,
                   id: Number(editParam),
                 });
+            onClose();
           }}
           buttonStyles="!w-fit "
         >

@@ -7,19 +7,19 @@ const Videoform = () => {
   const [company, setComapany] = useState("");
   const [name, setName] = useState("");
 
-  // const createPost = api.episode.createEpisode.useMutation({
-  //   onError: (err) => {
-  //     console.log(err.message);
-  //   },
-  //   onSuccess: async () => {
-  //     console.log("Created sucessfully!");
-  //     setUrl("");
-  //   },
-  // });
-  // const handleSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   createPost.mutate({ url });
-  // };
+  const createPost = api.episode.createEpisode.useMutation({
+    onError: (err) => {
+      console.log(err.message);
+    },
+    onSuccess: async () => {
+      console.log("Created sucessfully!");
+      setUrl("");
+    },
+  });
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    createPost.mutate({ url });
+  };
 
   const createAds = api.ads.createAds.useMutation({
     onError: (err) => {
@@ -38,14 +38,18 @@ const Videoform = () => {
 
   return (
     <div>
-      {/* <form onSubmit={handleSubmit}>
+      <h1 className="mb-5">
+        this is just behind the scene code to populate the db
+      </h1>
+      <p>Add Episode </p>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           onChange={(e) => setUrl(e.target.value)}
           className="border border-black"
         />
         <button>Submit</button>
-      </form> */}
+      </form>
       ads form
       <form onSubmit={handleadsSubmit}>
         <input

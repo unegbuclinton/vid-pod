@@ -4,6 +4,7 @@ import VdButton from "../button/VdButton";
 import { adMarkers } from "@/app/libs/jsondata/admarker";
 import { api } from "@/trpc/react";
 import toast from "react-hot-toast";
+import { useMarker } from "@/app/libs/hooks/syncToServer";
 
 const CreateAdMarker = ({
   onClose,
@@ -18,31 +19,11 @@ const CreateAdMarker = ({
 }) => {
   const [activeMArker, setActiveMarker] = useState<string>("Auto");
 
-  const { refetch } = api.episode.getEpisodes.useQuery();
-
-  const createMarker = api.admarker.createNewMarker.useMutation({
-    onError: (err) => {
-      toast.error("Something went wrong!");
-      console.log(err.message);
-    },
-    onSuccess: async () => {
-      toast.success("Created successfully!");
-
-      try {
-        const updatedData = await refetch();
-        if (updatedData) {
-          setVideoData(updatedData.data!);
-        }
-      } catch (err: any) {
-        toast.error("Failed to fetch episodes");
-        console.error(err.message);
-      }
-    },
-  });
+  const { createMarker } = useMarker();
 
   const handleSelectMarker = () => {
     if (activeMArker === "Auto" || activeMArker === "Static") {
-      createMarker.mutate({
+      createMarker({
         adMarkerType: activeMArker,
         episodeId: episodeData.id,
       });

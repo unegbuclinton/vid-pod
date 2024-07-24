@@ -6,24 +6,37 @@ import Slider from "../slider/Slider";
 const Waveform = ({
   duration,
   waveformRef,
+  handleUndo,
+  handleRedo,
+  loading,
 }: {
   duration: number;
   waveformRef: React.MutableRefObject<HTMLDivElement | null>;
+  handleRedo: () => void;
+  loading: boolean;
+  handleUndo: () => void;
 }) => {
-  console.log(waveformRef);
   return (
     <div className="w-full rounded-lg border border-lightestGrey p-6 shadow-buttonShadow">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
+          <div
+            title="Undo"
+            onClick={handleUndo}
+            className="flex items-center gap-2"
+          >
             <span className="cursor-pointer">
               <VdIcon iconName="undoIcon" />
             </span>
             <p className="text-sm text-lighterGrey">Undo</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div
+            title="Redo"
+            onClick={handleRedo}
+            className="flex items-center gap-2"
+          >
             <span className="cursor-pointer">
-              <VdIcon iconName="undoIcon" />
+              <VdIcon iconName="redoIcon" />
             </span>
             <p className="text-sm text-lighterGrey">Redo</p>
           </div>
@@ -41,17 +54,24 @@ const Waveform = ({
           </span>
         </div>
       </div>
-      <div
-        // id="waveform"
-        ref={waveformRef}
-        style={{
-          width: "100%",
-          height: "139px",
-          background: "#F0ABFC",
-          borderRadius: "8px",
-          border: "6px solid black",
-        }}
-      />
+      {loading && (
+        <div className="animate-pulse">
+          Please wait .... wave form is loading, maybe due to network or file
+          size
+        </div>
+      )}
+      {!loading && (
+        <div
+          ref={waveformRef}
+          style={{
+            width: "100%",
+            height: "139px",
+            background: "#F0ABFC",
+            borderRadius: "8px",
+            border: "6px solid black",
+          }}
+        />
+      )}
     </div>
   );
 };

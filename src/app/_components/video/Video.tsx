@@ -4,13 +4,11 @@ import VideoElement from "./videoElement/VideoElement";
 import VideoControl from "./videoControls/VideoControl";
 
 const Video = ({
-  setDuration,
   videoRef,
   onPrevious,
   onNext,
   data,
 }: {
-  setDuration: Dispatch<SetStateAction<number>>;
   videoRef: React.MutableRefObject<HTMLVideoElement | null>;
   data: Episode;
   onPrevious: () => void;
@@ -54,7 +52,6 @@ const Video = ({
   useEffect(() => {
     const handleLoadedMetadata = () => {
       if (videoRef.current) {
-        setDuration(videoRef.current.duration);
       }
     };
     const videoElement = videoRef.current;

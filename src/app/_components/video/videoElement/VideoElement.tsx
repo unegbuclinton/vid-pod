@@ -9,10 +9,12 @@ const VideoElement: React.FC<videoProp> = ({ videoRef, data }) => {
     <div
       className={`mb-4 h-[85%] w-full animate-pulse rounded-lg bg-dark/65`}
     ></div>;
+  const url =
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
   return (
     <div className={`mb-4 h-[85%] w-full rounded-lg`}>
-      <video ref={videoRef} autoPlay className="rounded-lg">
-        <source src={data.url} type="video/mp4" />
+      <video ref={videoRef} className="rounded-lg">
+        <source src={url} type="video/mp4" />
       </video>
     </div>
   );

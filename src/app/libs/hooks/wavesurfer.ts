@@ -1,4 +1,3 @@
-// src/hooks/useWaveSurfer.ts
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
@@ -11,6 +10,43 @@ interface UseWaveSurferProps {
 const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
   const wavesurfer = useRef<WaveSurfer | null>(null);
   const [refsReady, setRefsReady] = useState(false);
+  const [timeUpdate, setTimeUpdate] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
+
+  const seekHistory = useRef<number[]>([]);
+  const redoSeekHistory = useRef<number[]>([]);
+
+  const addSeekHistory = (time: number) => {
+    seekHistory.current.push(time);
+    redoSeekHistory.current = [];
+  };
+
+  const undo = () => {
+    console.log("undo clicked");
+    const lastTime = seekHistory.current.pop();
+    if (lastTime !== undefined) {
+      redoSeekHistory.current.push(lastTime);
+      if (wavesurfer.current) {
+        wavesurfer.current.seekTo(lastTime / wavesurfer.current.getDuration());
+        setTimeUpdate(lastTime);
+      }
+    }
+  };
+
+  const redo = () => {
+    console.log("redo clicked");
+    const lastUndoTime = redoSeekHistory.current.pop();
+    if (lastUndoTime !== undefined) {
+      addSeekHistory(lastUndoTime);
+      if (wavesurfer.current) {
+        wavesurfer.current.seekTo(
+          lastUndoTime / wavesurfer.current.getDuration(),
+        );
+      }
+    }
+  };
+
+  console.log(seekHistory);
 
   useEffect(() => {
     if (videoRef.current && waveformRef.current) {
@@ -20,7 +56,6 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
 
   useEffect(() => {
     if (refsReady) {
-      console.log("I am trying to create");
       const regions = RegionsPlugin.create();
 
       wavesurfer.current = WaveSurfer.create({
@@ -48,13 +83,27 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
         channelIdx: 2,
       });
 
+      wavesurfer.current.on("timeupdate", () => {
+        const currentTime = wavesurfer.current?.getCurrentTime();
+        setTimeUpdate(currentTime!);
+      });
+
+      wavesurfer.current.on("seeking", () => {
+        addSeekHistory(wavesurfer.current?.getCurrentTime() || 0);
+        console.log("seeking");
+      });
+
+      wavesurfer.current.on("ready", () => {
+        setLoading(false);
+      });
+
       return () => {
         wavesurfer.current?.destroy();
       };
     }
   }, [refsReady]);
 
-  return { wavesurfer };
+  return { wavesurfer, timeUpdate, undo, redo, loading };
 };
 
 export default useWaveSurfer;

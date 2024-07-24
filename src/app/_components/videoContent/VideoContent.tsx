@@ -6,11 +6,8 @@ import Video from "../video/Video";
 import Waveform from "../waveform/Waveform";
 import { api } from "@/trpc/react";
 import useWaveSurfer from "@/app/libs/hooks/wavesurfer";
-import WaveSurfer from "wavesurfer.js";
-import RegionsPlugin from "wavesurfer.js/dist/plugins/regions.js";
 
 const VideoContent: React.FC = () => {
-  const [duration, setDuration] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const waveformRef = useRef<HTMLDivElement | null>(null);
   const [videoData, setVideoData] = useState<Episode[]>([]);
@@ -19,12 +16,10 @@ const VideoContent: React.FC = () => {
 
   const { data, error, isLoading } = api.episode.getEpisodes.useQuery();
 
-  useWaveSurfer({ videoRef, waveformRef });
-
-  // const videoRef = useRef<HTMLVideoElement | null>(null);
-  // const waveformRef = useRef<HTMLDivElement | null>(null);
-  // const wavesurfer = useRef<WaveSurfer | null>(null);
-  // const [refsReady, setRefsReady] = useState(false);
+  const { timeUpdate, redo, undo, loading } = useWaveSurfer({
+    videoRef,
+    waveformRef,
+  });
 
   useEffect(() => {
     if (data) {
@@ -74,7 +69,6 @@ const VideoContent: React.FC = () => {
           <AdMarkerCard data={currentEpisode!} setVideoData={setVideoData} />
           <div className="flex h-[552px] w-[668px] flex-col justify-between rounded-2xl border border-lightestGrey p-6">
             <Video
-              setDuration={setDuration}
               onNext={handleNextEpisode}
               onPrevious={handlePreviousEpisode}
               videoRef={videoRef}
@@ -83,7 +77,13 @@ const VideoContent: React.FC = () => {
           </div>
         </div>
 
-        <Waveform duration={duration} waveformRef={waveformRef} />
+        <Waveform
+          loading={loading}
+          duration={timeUpdate}
+          waveformRef={waveformRef}
+          handleRedo={redo}
+          handleUndo={undo}
+        />
       </div>
     </article>
   );
