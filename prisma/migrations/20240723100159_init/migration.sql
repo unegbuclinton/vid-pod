@@ -1,0 +1,15 @@
+-- CreateTable
+CREATE TABLE "AdMarker" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "adMarkerType" TEXT NOT NULL,
+    "episodeId" INTEGER,
+    CONSTRAINT "AdMarker_episodeId_fkey" FOREIGN KEY ("episodeId") REFERENCES "Episode" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Episode" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "url" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
