@@ -12,7 +12,7 @@ export default async function Home() {
       <main>
         <Navbar />
         <div className="flex">
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense>
             <SideBar />
           </Suspense>
           <VideoContent />

@@ -99,7 +99,7 @@ const AdMarkerCard = ({
         />
       </VdModal>
       <VdModal isShown={abMarkerModal} hide={() => setAbMarkerModal(false)}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <AbTestResult
             episodeId={data?.id}
             adResults={adRestlt}

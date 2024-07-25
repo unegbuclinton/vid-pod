@@ -33,7 +33,7 @@ const AbTest = ({
     setAdResult(selectedItems);
   };
 
-  const { data, isLoading } = api.ads.getAllAds.useQuery();
+  const { data } = api.ads.getAllAds.useQuery();
 
   useEffect(() => {
     if (data) {
@@ -50,8 +50,6 @@ const AbTest = ({
   useEffect(() => {
     setAdResult(selectedItems);
   }, [selectedItems]);
-
-  if (isLoading) return <div>Loading......</div>;
 
   return (
     <div className="relative h-[650px] rounded-lg bg-white p-8">
