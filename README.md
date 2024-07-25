@@ -66,4 +66,13 @@ Make sure you have the following installed on your system:
 
     This will launch the project in development mode. You can then open your browser and visit http://localhost:3000 or the chosen port to view the application.
 
+7.  **Deployment url::**
+
+    You can also open the project with the deployed link
+
+    ```bash
+    https://vid-pod.vercel.app/
+
+    ```
+
     **Thank you ROX**

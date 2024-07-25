@@ -91,6 +91,10 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
         console.log("seeking");
       });
 
+      wavesurfer.current.on("ready", () => {
+        setLoading(false);
+      });
+
       return () => {
         wavesurfer.current?.destroy();
       };
