@@ -51,7 +51,7 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
       setRefsReady(true);
     }
   }, [videoRef.current, waveformRef.current]);
-
+  console.log(loading);
   useEffect(() => {
     if (refsReady) {
       const regions = RegionsPlugin.create();
@@ -95,6 +95,9 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
         setLoading(false);
       });
 
+      wavesurfer.current.on("error", (error) => {
+        console.error("WaveSurfer error:", error);
+      });
       return () => {
         wavesurfer.current?.destroy();
       };
