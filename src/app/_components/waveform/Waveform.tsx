@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import VdIcon from "../vidIcons/VidIcons";
 import { formatDuration } from "@/app/libs/jsondata/helperFunctions";
 import Slider from "../slider/Slider";
@@ -16,7 +16,16 @@ const Waveform = ({
   loading: boolean;
   handleUndo: () => void;
 }) => {
-  if (loading) return <div>No form data yet ... </div>;
+  const [show, setShow] = useState(false);
+  // if (loading) return <div>No form data yet ... </div>;
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 3500);
+  }, []);
+
+  if (!show) return <div>Not yet ......</div>;
   return (
     <div className="w-full rounded-lg border border-lightestGrey p-6 shadow-buttonShadow">
       <div className="mb-8 flex items-center justify-between">
