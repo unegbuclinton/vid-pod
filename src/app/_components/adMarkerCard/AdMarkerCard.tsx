@@ -20,14 +20,15 @@ const AdMarkerCard = ({
   const [adRestlt, setAdResult] = useState<Ad[]>([]);
 
   const AbTestResult = React.lazy(() => import("../abTests/AbTestResult"));
-  const adsData = data && data.adMarkers!;
+  const adsData = data?.adMarkers;
+
   return (
     <div className="flex w-[370px] flex-col justify-between rounded-2xl border border-lightestGrey p-6">
       <div>
         <div className="mb-4 flex items-center justify-between">
           <p className="text-base font-bold">Ad markers</p>
           <p className="text-base font-semibold text-lighterGrey">
-            {`${adsData?.length ?? 0} ${adsData?.length > 1 ? "markers" : "marker"}`}
+            {`${adsData?.length ?? 0} ${(adsData?.length ?? 0) > 1 ? "markers" : "marker"}`}
           </p>
         </div>
 
