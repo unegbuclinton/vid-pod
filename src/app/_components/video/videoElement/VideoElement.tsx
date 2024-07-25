@@ -15,7 +15,12 @@ const VideoElement: React.FC<videoProp> = ({ videoRef, data }) => {
   return (
     <div className={`mb-4 h-[85%] w-full rounded-lg`}>
       <video ref={videoRef} className="rounded-lg">
-        <source src={data?.url} type="video/mp4" />
+        <source
+          src={
+            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+          }
+          type="video/mp4"
+        />
       </video>
     </div>
   );
