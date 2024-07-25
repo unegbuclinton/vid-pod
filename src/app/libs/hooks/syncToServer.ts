@@ -2,21 +2,37 @@ import { api } from "@/trpc/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
+type CreateMarkerInput = {
+  adMarkerType: "Auto" | "Static" | "A/B";
+  episodeId: number;
+};
+
+type UpdateMarkerInput = {
+  adMarkerType: "Auto" | "Static" | "A/B";
+  episodeId: number;
+  id: number;
+};
+
 type UseMarkerReturnType = {
-  createMarker: (data: any) => void;
-  updateMarker: (data: any) => void;
-  updatedData: any;
+  createMarker: (data: CreateMarkerInput) => void;
+  updateMarker: (data: UpdateMarkerInput) => void;
+  updatedData: Episode[];
 };
 
 export const useMarker = (): UseMarkerReturnType => {
-  const [updatedData, setUpdatedData] = useState<any>(null);
+  const [updatedData, setUpdatedData] = useState<Episode[]>([]);
 
   const { refetch } = api.episode.getEpisodes.useQuery();
 
   const createMarkerMutation = api.admarker.createNewMarker.useMutation({
-    onError: (err: any) => {
+    onError: (err: unknown) => {
       toast.error("Something went wrong!");
-      console.log(err.message);
+
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log("An unknown error occurred.", err);
+      }
     },
     onSuccess: async () => {
       toast.success("Created successfully!");
@@ -26,17 +42,30 @@ export const useMarker = (): UseMarkerReturnType => {
         if (updatedData) {
           setUpdatedData(updatedData.data!);
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         toast.error("Failed to fetch episodes");
-        console.error(err.message);
+
+        if (err instanceof Error) {
+          console.log(err.message);
+        } else {
+          console.log(
+            "An unknown error occurred while fetching episodes.",
+            err,
+          );
+        }
       }
     },
   });
 
   const updateMarkerMutation = api.admarker.updateMarker.useMutation({
-    onError: (err: any) => {
+    onError: (err: unknown) => {
       toast.error("Something went wrong!");
-      console.log(err.message);
+
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log("An unknown error occurred.", err);
+      }
     },
     onSuccess: async () => {
       toast.success("Updated successfully!");
@@ -46,23 +75,27 @@ export const useMarker = (): UseMarkerReturnType => {
         if (updatedData) {
           setUpdatedData(updatedData.data!);
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         toast.error("Failed to fetch episodes");
-        console.error(err.message);
+
+        if (err instanceof Error) {
+          console.error(err.message);
+        } else {
+          console.log(
+            "An unknown error occurred while fetching episodes.",
+            err,
+          );
+        }
       }
     },
   });
 
-  const createMarker = (data: any) => {
+  const createMarker = (data: CreateMarkerInput) => {
     createMarkerMutation.mutate(data);
   };
 
-  const updateMarker = (data: any) => {
-    updateMarkerMutation.mutate(data, {
-      onSuccess: () => {
-        toast.success("Updated successfully!");
-      },
-    });
+  const updateMarker = (data: UpdateMarkerInput) => {
+    updateMarkerMutation.mutate(data);
   };
 
   return { createMarker, updateMarker, updatedData };

@@ -29,9 +29,10 @@ const ActionItems = () => {
   ];
   return (
     <ul className="px-3">
-      {actionData.map(({ icon, title, actionBtn }) => (
+      {actionData.map(({ icon, title, actionBtn }, idx) => (
         <li
-          className={`text-lighterGrey mb-4 flex cursor-pointer items-center gap-4 text-sm font-bold`}
+          key={idx}
+          className={`mb-4 flex cursor-pointer items-center gap-4 text-sm font-bold text-lighterGrey`}
         >
           <span>
             <VdIcon iconName={icon} />

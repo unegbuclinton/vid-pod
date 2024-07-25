@@ -26,17 +26,22 @@ const Video = ({
       videoRef.current.currentTime += 10;
     }
   };
-  const handleTogglePlayPause = () => {
+  const handleTogglePlayPause = async () => {
     if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setPlaying(false);
+      try {
+        if (videoRef.current.paused) {
+          await videoRef.current.play();
+          setPlaying(true);
+        } else {
+          videoRef.current.pause();
+          setPlaying(false);
+        }
+      } catch (error) {
+        console.error("Error handling video play/pause:", error);
       }
     }
   };
+
   const handleJumpToStart = () => {
     if (videoRef.current) {
       videoRef.current.currentTime = 0;

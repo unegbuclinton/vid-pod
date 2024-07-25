@@ -16,7 +16,7 @@ const AdMarkerIndicator = ({
   setVideoData,
   id,
 }: {
-  adType: AdMarker | any;
+  adType: string;
   index: number;
   episodeId: number | null;
   id: number;
@@ -45,9 +45,11 @@ const AdMarkerIndicator = ({
         if (updatedData) {
           setVideoData(updatedData.data!);
         }
-      } catch (err: any) {
+      } catch (err) {
         toast.error("Failed to fetch episodes");
-        console.error(err.message);
+        if (err instanceof Error) {
+          console.error(err.message);
+        }
       }
     },
   });

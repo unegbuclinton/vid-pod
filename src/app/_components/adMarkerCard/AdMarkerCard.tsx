@@ -25,11 +25,13 @@ const AdMarkerCard = ({
       <div>
         <div className="mb-4 flex items-center justify-between">
           <p className="text-base font-bold">Ad markers</p>
-          <p className="text-base font-semibold text-lighterGrey">{`${data.adMarkers?.length} ${data.adMarkers?.length! > 1 ? "markers" : "marker"}`}</p>
+          <p className="text-base font-semibold text-lighterGrey">
+            {`${data.adMarkers?.length ?? 0} ${data.adMarkers?.length && data.adMarkers.length > 1 ? "markers" : "marker"}`}
+          </p>
         </div>
 
         <>
-          {!data?.adMarkers || data.adMarkers.length === 0 ? (
+          {!data.adMarkers || data.adMarkers.length === 0 ? (
             <div>No Ad marker available</div>
           ) : (
             data.adMarkers.map(({ adMarkerType, id, episodeId }, index) => (

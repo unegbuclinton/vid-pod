@@ -2,7 +2,7 @@ import React from "react";
 import VdIcon from "../vidIcons/VidIcons";
 import VdButton from "../button/VdButton";
 import VideoCard from "../videoCard/VideoCard";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMarker } from "@/app/libs/hooks/syncToServer";
 
 const AbTestResult = ({
@@ -22,7 +22,7 @@ const AbTestResult = ({
   const randomIndex = Math.floor(Math.random() * adResults.length);
 
   const { createMarker, updateMarker } = useMarker();
-
+  const router = useRouter();
   return (
     <div className="relative rounded-lg bg-white p-8">
       <span className="absolute right-4 top-4 cursor-pointer" onClick={onClose}>
@@ -64,6 +64,7 @@ const AbTestResult = ({
                   id: Number(editParam),
                 });
             onClose();
+            router.push("/");
           }}
           buttonStyles="!w-fit "
         >

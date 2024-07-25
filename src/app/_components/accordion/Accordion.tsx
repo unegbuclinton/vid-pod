@@ -25,10 +25,12 @@ const Accordion = ({
         </span>{" "}
       </p>
       <ul
-        className={`${!toggleShow ? "side-line h-fit" : "h-0"} transition-height ease-custom-bezier relative overflow-hidden px-3 py-3 duration-500`}
+        className={`${!toggleShow ? "side-line h-fit" : "h-0"} transition-height relative overflow-hidden px-3 py-3 duration-500 ease-custom-bezier`}
       >
         {ads.map(({ name }, idx) => (
-          <li className="list-none py-3 text-sm font-semibold">{name}</li>
+          <li key={idx} className="list-none py-3 text-sm font-semibold">
+            {name}
+          </li>
         ))}
       </ul>
     </div>

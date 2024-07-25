@@ -87,7 +87,7 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
       });
 
       wavesurfer.current.on("seeking", () => {
-        addSeekHistory(wavesurfer.current?.getCurrentTime() || 0);
+        addSeekHistory(wavesurfer.current?.getCurrentTime() ?? 0);
         console.log("seeking");
       });
 

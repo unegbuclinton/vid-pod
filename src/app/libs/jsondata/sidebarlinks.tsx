@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 interface SidebarLinks {
   title: string;
   icon: string;

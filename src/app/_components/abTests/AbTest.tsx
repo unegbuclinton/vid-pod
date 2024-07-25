@@ -33,7 +33,7 @@ const AbTest = ({
     setAdResult(selectedItems);
   };
 
-  const { data, error, isLoading } = api.ads.getAllAds.useQuery();
+  const { data, isLoading } = api.ads.getAllAds.useQuery();
 
   useEffect(() => {
     if (data) {
@@ -65,7 +65,7 @@ const AbTest = ({
       </p>
 
       <div className="flex gap-3">
-        <div className="bg-grey hidden-scroll h-[450px] w-[200px] overflow-y-scroll rounded-lg p-3 pb-5">
+        <div className="hidden-scroll h-[450px] w-[200px] overflow-y-scroll rounded-lg bg-grey p-3 pb-5">
           <div className="relative h-11 w-[175px]">
             <span className="absolute inset-y-0 left-0 flex items-center pl-2">
               <VdIcon iconName="searchIcon" />
@@ -82,7 +82,7 @@ const AbTest = ({
             </span>
             Ad library
           </p>
-          <p className="text-text-dark my-4 text-sm font-semibold">
+          <p className="my-4 text-sm font-semibold text-text-dark">
             All folders
           </p>
 

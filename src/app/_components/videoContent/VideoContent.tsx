@@ -66,7 +66,7 @@ const VideoContent: React.FC = () => {
           Episode 503 • 12 April 2024
         </p>
         <div className="mb-8 flex gap-8">
-          <AdMarkerCard data={currentEpisode!} setVideoData={setVideoData} />
+          <AdMarkerCard data={currentEpisode} setVideoData={setVideoData} />
           <div className="flex h-[552px] w-[668px] flex-col justify-between rounded-2xl border border-lightestGrey p-6">
             <Video
               onNext={handleNextEpisode}
