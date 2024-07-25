@@ -20,21 +20,22 @@ const AdMarkerCard = ({
   const [adRestlt, setAdResult] = useState<Ad[]>([]);
 
   const AbTestResult = React.lazy(() => import("../abTests/AbTestResult"));
+  const adsData = data && data.adMarkers!;
   return (
     <div className="flex w-[370px] flex-col justify-between rounded-2xl border border-lightestGrey p-6">
       <div>
         <div className="mb-4 flex items-center justify-between">
           <p className="text-base font-bold">Ad markers</p>
           <p className="text-base font-semibold text-lighterGrey">
-            {`${data.adMarkers?.length ?? 0} ${data.adMarkers?.length && data.adMarkers.length > 1 ? "markers" : "marker"}`}
+            {`${adsData?.length ?? 0} ${adsData?.length > 1 ? "markers" : "marker"}`}
           </p>
         </div>
 
         <>
-          {!data.adMarkers || data.adMarkers.length === 0 ? (
+          {!adsData || (adsData && adsData?.length === 0) ? (
             <div>No Ad marker available</div>
           ) : (
-            data.adMarkers.map(({ adMarkerType, id, episodeId }, index) => (
+            adsData.map(({ adMarkerType, id, episodeId }, index) => (
               <AdMarkerIndicator
                 setVideoData={setVideoData}
                 id={id}
@@ -99,7 +100,7 @@ const AdMarkerCard = ({
       <VdModal isShown={abMarkerModal} hide={() => setAbMarkerModal(false)}>
         <Suspense fallback={<div>Loading...</div>}>
           <AbTestResult
-            episodeId={data.id}
+            episodeId={data?.id}
             adResults={adRestlt}
             setVideoData={setVideoData}
             onClose={() => setAbMarkerModal(false)}
