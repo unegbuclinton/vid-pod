@@ -30,7 +30,6 @@ const VideoContent: React.FC = () => {
 
   const currentEpisode = videoData[videoData.length - 1];
 
-  if (isLoading) return <div>Loading.......</div>;
   return (
     <article className="p-12">
       <span>
