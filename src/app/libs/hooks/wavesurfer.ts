@@ -11,7 +11,7 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
   const wavesurfer = useRef<WaveSurfer | null>(null);
   const [refsReady, setRefsReady] = useState(false);
   const [timeUpdate, setTimeUpdate] = useState<number>(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const seekHistory = useRef<number[]>([]);
   const redoSeekHistory = useRef<number[]>([]);
@@ -91,8 +91,8 @@ const useWaveSurfer = ({ videoRef, waveformRef }: UseWaveSurferProps) => {
         console.log("seeking");
       });
 
-      wavesurfer.current.on("ready", () => {
-        setLoading(false);
+      wavesurfer.current.on("ready", (duration) => {
+        console.log("Ready", duration + "s");
       });
 
       wavesurfer.current.on("error", (error) => {

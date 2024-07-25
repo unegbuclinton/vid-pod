@@ -51,7 +51,7 @@ const VideoContent: React.FC = () => {
         </div>
 
         <Waveform
-          loading={loading}
+          loading={!data}
           duration={timeUpdate}
           waveformRef={waveformRef}
           handleRedo={redo}
