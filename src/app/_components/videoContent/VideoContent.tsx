@@ -30,8 +30,6 @@ const VideoContent: React.FC = () => {
     }
   }, [data, error, isLoading]);
 
-  if (isLoading) return <div>Loading.....</div>;
-
   const currentEpisode = videoData[currentEpisodeIndex];
 
   const handleNextEpisode = () => {
