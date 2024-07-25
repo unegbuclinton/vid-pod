@@ -55,9 +55,8 @@ const Waveform = ({
         </div>
       </div>
       {loading && (
-        <div className="mb-2 animate-pulse">
-          Please wait .... wave form is loading, maybe due to network or file
-          size
+        <div className="mb-2 animate-pulse text-xs">
+          Please wait, wave form is loading......, size
         </div>
       )}
 
