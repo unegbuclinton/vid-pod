@@ -4,13 +4,13 @@ import toast from "react-hot-toast";
 
 type CreateMarkerInput = {
   adMarkerType: "Auto" | "Static" | "A/B";
-  episodeId: number;
+  episodeId: string;
 };
 
 type UpdateMarkerInput = {
   adMarkerType: "Auto" | "Static" | "A/B";
-  episodeId: number;
-  id: number;
+  episodeId: string;
+  id: string;
 };
 
 type UseMarkerReturnType = {

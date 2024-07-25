@@ -2,35 +2,32 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
-
 model AdMarker {
-  id             Int          @id @default(autoincrement())
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId // Use ObjectId type
   adMarkerType   String
-  episode        Episode?     @relation(fields: [episodeId], references: [id])
-  episodeId      Int?
+  episodeId      String?  @db.ObjectId // Foreign key must be a String and ObjectId type
+  episode        Episode? @relation(fields: [episodeId], references: [id])
 }
 
 model Episode {
-  id        Int        @id @default(autoincrement())
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId // Use ObjectId type
   url       String
-  adMarkers AdMarker[] // One-to-many relationship
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  adMarkers AdMarker[]  // One-to-many relationship
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 }
 
-
 model Ads {
- id        Int        @id @default(autoincrement())
- company   String
- url       String 
- name      String
- 
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId // Use ObjectId type
+  company   String
+  url       String
+  name      String
 }

@@ -45,7 +45,7 @@ const AdMarkerCard = ({
                 adType={
                   adMarkerType === "A/B" ? "adABIcon" : `ad${adMarkerType}Icon`
                 }
-                index={index + 1}
+                index={String(index + 1)}
               />
             ))
           )}

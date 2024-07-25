@@ -6,7 +6,7 @@ export const adMarkerRouter = createTRPCRouter({
   createNewMarker: publicProcedure
     .input(
       z.object({
-        episodeId: z.number(),
+        episodeId: z.string(),
         adMarkerType: z.enum(["Auto", "Static", "A/B"]),
       }),
     )
@@ -20,7 +20,7 @@ export const adMarkerRouter = createTRPCRouter({
     }),
 
   getAdMarkersByEpisode: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.string() }))
     .query(async ({ input, ctx }) => {
       const adMarkers = await ctx.db.adMarker.findMany({
         where: { episodeId: input.id },
@@ -38,7 +38,7 @@ export const adMarkerRouter = createTRPCRouter({
   }),
 
   deleteMarker: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       return ctx.db.adMarker.delete({
         where: {
@@ -50,8 +50,8 @@ export const adMarkerRouter = createTRPCRouter({
   updateMarker: publicProcedure
     .input(
       z.object({
-        id: z.number(),
-        episodeId: z.number().optional(),
+        id: z.string(),
+        episodeId: z.string().optional(),
         adMarkerType: z.enum(["Auto", "Static", "A/B"]).optional(),
       }),
     )

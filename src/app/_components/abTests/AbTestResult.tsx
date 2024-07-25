@@ -12,7 +12,7 @@ const AbTestResult = ({
 }: {
   onClose: () => void;
   adResults: Ad[];
-  episodeId: number;
+  episodeId: string;
   setVideoData: React.Dispatch<React.SetStateAction<Episode[]>>;
 }) => {
   const searchParams = useSearchParams();
@@ -61,7 +61,7 @@ const AbTestResult = ({
               : updateMarker({
                   adMarkerType: "A/B",
                   episodeId: episodeId,
-                  id: Number(editParam),
+                  id: editParam,
                 });
             onClose();
             router.push("/");

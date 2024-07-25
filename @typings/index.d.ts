@@ -1,12 +1,12 @@
 interface AdMarker {
-  id: number;
+  id: string;
   adMarkerType: string;
   episode?: Episode;
-  episodeId: number | null;
+  episodeId: string | null;
 }
 
 interface Episode {
-  id: number;
+  id: string;
   url: string;
   adMarkers?: AdMarker[];
   createdAt: Date;

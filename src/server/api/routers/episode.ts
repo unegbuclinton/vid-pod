@@ -1,4 +1,4 @@
-import { date, z } from "zod";
+import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
@@ -24,13 +24,4 @@ export const episodeRouter = createTRPCRouter({
 
     return episodes;
   }),
-  // getLatest: publicProcedure.query(({ ctx }) => {
-  //   return ctx.db.post.findFirst({
-  //     orderBy: { createdAt: "desc" },
-  //   });
-  // }),
-
-  // all_posts: publicProcedure.query(({ ctx }) => {
-  //   return ctx.db.post.findMany();
-  // }),
 });

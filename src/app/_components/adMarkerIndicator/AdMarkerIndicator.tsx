@@ -17,9 +17,9 @@ const AdMarkerIndicator = ({
   id,
 }: {
   adType: string;
-  index: number;
-  episodeId: number | null;
-  id: number;
+  index: string;
+  episodeId: string | null;
+  id: string;
   setVideoData: React.Dispatch<React.SetStateAction<Episode[]>>;
 }) => {
   const [editSelection, setEditSelection] = useState<boolean>(false);

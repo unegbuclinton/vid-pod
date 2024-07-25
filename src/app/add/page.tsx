@@ -19,6 +19,7 @@ const AddForm = () => {
     },
     onSuccess: async () => {
       toast.success("Created successfully!");
+      setUrl("");
     },
   });
 

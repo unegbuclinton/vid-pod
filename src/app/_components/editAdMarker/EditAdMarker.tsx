@@ -13,9 +13,9 @@ const EditAdMarker = ({
   setVideoData,
 }: {
   onClose: () => void;
-  episodeDataId: number | null;
+  episodeDataId: string | null;
   setAbMarkerSelection: React.Dispatch<React.SetStateAction<boolean>>;
-  id: number;
+  id: string;
   setVideoData: React.Dispatch<React.SetStateAction<Episode[]>>;
 }) => {
   const [activeMArker, setActiveMarker] = useState<string>("Auto");
