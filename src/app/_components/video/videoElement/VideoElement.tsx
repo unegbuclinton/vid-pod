@@ -8,7 +8,7 @@ const VideoElement: React.FC<videoProp> = ({ videoRef, data }) => {
   if (data?.url === undefined)
     return (
       <div
-        className={`mb-4 h-[85%] w-full animate-pulse rounded-lg bg-dark/65`}
+        className={`mb-4 h-72 w-full animate-pulse rounded-lg bg-dark/65`}
       ></div>
     );
 
