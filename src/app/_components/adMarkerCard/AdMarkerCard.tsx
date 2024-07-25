@@ -6,7 +6,6 @@ import VdIcon from "../vidIcons/VidIcons";
 import VdModal from "../VdModal/VdModal";
 import CreateAdMarker from "../createAdMarker/CreateAdMarker";
 import AbTest from "../abTests/AbTest";
-// import AbTestResult from "../abTests/AbTestResult";
 
 const AdMarkerCard = ({
   data,
