@@ -2,15 +2,12 @@ import React, { useState } from "react";
 import VdIcon from "../vidIcons/VidIcons";
 import VdButton from "../button/VdButton";
 import { adMarkers } from "@/app/libs/jsondata/admarker";
-import { api } from "@/trpc/react";
-import toast from "react-hot-toast";
 import { useMarker } from "@/app/libs/hooks/syncToServer";
 
 const CreateAdMarker = ({
   onClose,
   setAbMarkerSelection,
   episodeData,
-  setVideoData,
 }: {
   onClose: () => void;
   episodeData: Episode;

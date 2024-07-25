@@ -12,8 +12,6 @@ const VideoContent: React.FC = () => {
   const waveformRef = useRef<HTMLDivElement | null>(null);
   const [videoData, setVideoData] = useState<Episode[]>([]);
 
-  const [currentEpisodeIndex, setCurrentIndexEpisode] = useState(0);
-
   const { data, error, isLoading } = api.episode.getEpisodes.useQuery();
 
   const { timeUpdate, redo, undo, loading } = useWaveSurfer({
@@ -30,23 +28,7 @@ const VideoContent: React.FC = () => {
     }
   }, [data, error, isLoading]);
 
-  const currentEpisode = videoData[currentEpisodeIndex];
-
-  const handleNextEpisode = () => {
-    if (currentEpisodeIndex < videoData.length) {
-      setCurrentIndexEpisode((prev) => prev++);
-    } else {
-      return;
-    }
-  };
-
-  const handlePreviousEpisode = () => {
-    if (currentEpisodeIndex === 0) {
-      return;
-    } else {
-      setCurrentIndexEpisode((prev) => prev--);
-    }
-  };
+  const currentEpisode = videoData[videoData.length - 1];
 
   return (
     <article className="p-12">
@@ -64,12 +46,7 @@ const VideoContent: React.FC = () => {
         <div className="mb-8 flex gap-8">
           <AdMarkerCard data={currentEpisode!} setVideoData={setVideoData} />
           <div className="flex h-[552px] w-[668px] flex-col justify-between rounded-2xl border border-lightestGrey p-6">
-            <Video
-              onNext={handleNextEpisode}
-              onPrevious={handlePreviousEpisode}
-              videoRef={videoRef}
-              data={currentEpisode!}
-            />
+            <Video videoRef={videoRef} data={currentEpisode!} />
           </div>
         </div>
 

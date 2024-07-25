@@ -5,14 +5,10 @@ import VideoControl from "./videoControls/VideoControl";
 
 const Video = ({
   videoRef,
-  onPrevious,
-  onNext,
   data,
 }: {
   videoRef: React.MutableRefObject<HTMLVideoElement | null>;
   data: Episode;
-  onPrevious: () => void;
-  onNext: () => void;
 }) => {
   const [playing, setPlaying] = useState<boolean>(false);
   const handleRewind = () => {
@@ -73,8 +69,6 @@ const Video = ({
       <VideoControl
         onForward={handleForward}
         onRewind={handleRewind}
-        onNext={onNext}
-        onPrevious={onPrevious}
         tooglePlayPause={handleTogglePlayPause}
         jumpToEnd={handleJumpToEnd}
         jumpToStart={handleJumpToStart}

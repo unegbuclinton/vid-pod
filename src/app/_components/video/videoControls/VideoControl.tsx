@@ -5,8 +5,6 @@ interface VideoControlProps {
   onRewind: () => void;
   onForward: () => void;
   tooglePlayPause: () => void;
-  onPrevious: () => void;
-  onNext: () => void;
   jumpToStart: () => void;
   jumpToEnd: () => void;
   playing: boolean;
@@ -17,8 +15,6 @@ const VideoControl: React.FC<VideoControlProps> = ({
   onForward,
   tooglePlayPause,
   jumpToEnd,
-  onPrevious,
-  onNext,
   jumpToStart,
   playing,
 }) => {
@@ -43,7 +39,7 @@ const VideoControl: React.FC<VideoControlProps> = ({
           </span>
           10s
         </p>
-        <span title="Previous" className="cursor-pointer" onClick={onPrevious}>
+        <span title="Previous" className="cursor-pointer">
           <VdIcon iconName="nextIcon" />
         </span>
         <span
@@ -57,7 +53,7 @@ const VideoControl: React.FC<VideoControlProps> = ({
             <VdIcon iconName="pauseIcon" />
           )}
         </span>
-        <span title="Next" className="cursor-pointer" onClick={onNext}>
+        <span title="Next" className="cursor-pointer">
           <VdIcon iconName="prevIcon" />
         </span>
         <p
