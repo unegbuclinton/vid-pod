@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import AdMarkerIndicator from "../adMarkerIndicator/AdMarkerIndicator";
 import VdButton from "../button/VdButton";
 import VdIcon from "../vidIcons/VidIcons";
 import VdModal from "../VdModal/VdModal";
 import CreateAdMarker from "../createAdMarker/CreateAdMarker";
 import AbTest from "../abTests/AbTest";
-import AbTestResult from "../abTests/AbTestResult";
+// import AbTestResult from "../abTests/AbTestResult";
 
 const AdMarkerCard = ({
   data,
@@ -20,6 +20,7 @@ const AdMarkerCard = ({
   const [abMarkerSelection, setAbMarkerSelection] = useState<boolean>(false);
   const [adRestlt, setAdResult] = useState<Ad[]>([]);
 
+  const AbTestResult = React.lazy(() => import("../abTests/AbTestResult"));
   return (
     <div className="flex w-[370px] flex-col justify-between rounded-2xl border border-lightestGrey p-6">
       <div>
@@ -97,12 +98,14 @@ const AdMarkerCard = ({
         />
       </VdModal>
       <VdModal isShown={abMarkerModal} hide={() => setAbMarkerModal(false)}>
-        <AbTestResult
-          episodeId={data.id}
-          adResults={adRestlt}
-          setVideoData={setVideoData}
-          onClose={() => setAbMarkerModal(false)}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <AbTestResult
+            episodeId={data.id}
+            adResults={adRestlt}
+            setVideoData={setVideoData}
+            onClose={() => setAbMarkerModal(false)}
+          />
+        </Suspense>
       </VdModal>
     </div>
   );
