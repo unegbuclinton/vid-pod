@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## Getting Started on Vidpod
 
 Follow these steps to set up and run the project on your local machine:
@@ -67,3 +68,6 @@ Make sure you have the following installed on your system:
     This will launch the project in development mode. You can then open your browser and visit http://localhost:3000 or the chosen port to view the application.
 
     **Thank you ROX**
+=======
+# vid-pod
+>>>>>>> f6ce35382c5084e3e6b2c9f627993b547cabf171
