@@ -25,7 +25,6 @@ const Waveform = ({
     }, 3500);
   }, []);
 
-  if (!show) return <div>Not yet ......</div>;
   return (
     <div className="w-full rounded-lg border border-lightestGrey p-6 shadow-buttonShadow">
       <div className="mb-8 flex items-center justify-between">
@@ -64,11 +63,11 @@ const Waveform = ({
           </span>
         </div>
       </div>
-      {/* {loading && (
+      {loading && (
         <div className="mb-2 animate-pulse text-xs">
           Please wait, wave form is loading......
         </div>
-      )} */}
+      )}
 
       <div
         ref={waveformRef}
